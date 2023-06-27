@@ -1,0 +1,58 @@
+1. Наполнить произвольными данными таблицы streams, reactions, donations
+
+
+INSERT INTO streams (stream_id, created_at, author_id, title, is_completed)
+VALUES
+	 (1, CURRENT_TIMESTAMP, 1, NULL, false),
+	 (2, CURRENT_TIMESTAMP, 2, NULL, false),
+	 (3, CURRENT_TIMESTAMP, 3, NULL, false),
+   (4, CURRENT_TIMESTAMP, 4, NULL, false),
+   (5, CURRENT_TIMESTAMP, 5, NULL, false);
+
+
+
+
+INSERT INTO reactions (reaction_id, created_at, author_id, stream_id, value)
+VALUES
+	 (1, CURRENT_TIMESTAMP, 1, 1, 10),
+	 (2, CURRENT_TIMESTAMP, 2, 2, 11),
+	 (3, CURRENT_TIMESTAMP, 3, 3, 12),
+   (4, CURRENT_TIMESTAMP, 4, 4, 13),
+   (5, CURRENT_TIMESTAMP, 5, 5, 14);
+
+
+
+
+
+
+INSERT INTO donations (donation_id, created_at, amount, donator_id, stream_id)
+VALUES
+	 (1, CURRENT_TIMESTAMP, (2.1), 1, 1),
+	 (2, CURRENT_TIMESTAMP, (3.2), 2, 2),
+	 (3, CURRENT_TIMESTAMP, (4.1), 3, 3),
+   (4, CURRENT_TIMESTAMP, (5.2), 4, 4),
+   (5, CURRENT_TIMESTAMP, (7.1), 5, 5);
+
+
+
+
+2. Вывести информацию по стримам (проекция: имя автора, название стрима)
+
+SELECT 
+username,
+title
+FROM streams 
+LEFT JOIN users ON streams.author_id = users.user_id
+
+
+
+3. Вывести список пожертвований в порядке убывания размера (проекция: размер пожертвования, имя донатара, название стрима)
+
+SELECT
+amount,
+username,
+title
+FROM streams
+JOIN users ON streams.author_id = users.user_id
+JOIN donations ON donations.stream_id=streams.stream_id
+ORDER BY amount DESC
