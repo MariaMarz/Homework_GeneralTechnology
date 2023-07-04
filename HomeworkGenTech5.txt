@@ -1,0 +1,92 @@
+1. Вывести информацию о трех самых дорогих товарах не из China (проекция: названиетовара, ценатоваравusd, названиепоставщика, странапоставщика)
+
+
+
+ SELECT 
+Products.ProductName,
+ROUND (Products.Price * 1.1, 2) AS Price_usd,
+Suppliers.SupplierName,
+Suppliers.Country
+FROM Products
+
+ INNER JOIN Suppliers USING(SupplierID)
+WHERE Suppliers.Country != 'China'
+ORDER BY Products.Price DESC
+LIMIT 3
+
+
+
+2. Вывести страны клиентов и поставщиков (за исключением USA)
+
+SELECT Country FROM Customers
+WHERE Country != "USA"
+UNION
+SELECT Country FROM Suppliers 
+WHERE Country != "USA"
+
+
+
+3. Вывести названия проданных товаров
+
+
+SELECT DISTINCT
+Products.ProductName
+FROM OrderDetails
+
+INNER JOIN Products USING(ProductID)
+
+
+
+
+
+
+
+В рамках БД "стриминг-платформа":
+
+
+4. С помощью DDL создайте таблицу "комментарии юзеров к видео"
+
+
+
+CREATE TABLE comments (
+stream_id int,
+created_at timestamp,
+comment_id int,
+author_id int,
+content varchar(256)
+);
+
+
+INSERT INTO comments (stream_id, created_at, comment_id, username)
+VALUES
+	 (1, CURRENT_TIMESTAMP, 1, 1,  NULL),
+	 (2, CURRENT_TIMESTAMP, 2, 2, NULL),
+	 (3, CURRENT_TIMESTAMP, 3, 3, NULL),
+   (4, CURRENT_TIMESTAMP, 4, 4, NULL),
+   (5, CURRENT_TIMESTAMP, 5,5, NULL);
+
+
+5. Вывести три последних комментария, включая имена авторов и названия видео
+
+
+
+SELECT
+content,
+username,
+streams.title
+
+FROM comments
+
+JOIN streams ON comments.stream_id = streams.stream_id
+INNER JOIN users using(user_id)
+ORDER BY comments.created_at DESC
+LIMIT 3
+
+
+
+
+
+
+
+
+
