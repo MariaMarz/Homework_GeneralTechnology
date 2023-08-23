@@ -1,0 +1,53 @@
+1. Завершить описание схемы БД "онлайн-школа"
+
+https://dbdiagram.io/d/64d4b23002bd1c4a5e8ec73c
+
+
+
+2. Вывести три самых продаваемых товара
+
+SELECT ProductID,
+SUM(Products.Price * OrderDetails.Quantity) AS total_sold
+FROM OrderDetails
+JOIN Products USING(ProductID)
+GROUP BY ProductID
+ORDER BY total_sold DESC
+LIMIT 3
+
+3. Очистить почтовый индекс у всех клиентов не из China
+
+
+UPDATE Customers
+SET PostalCode = ''
+WHERE Country != 'China'
+
+
+4. Вывести данные о поставщике, который находится на четвертом месте по ко-ву поставленных товаров
+
+SELECT SupplierName,
+SUM(OrderDetails.Quantity) AS total_quantity
+FROM Suppliers
+JOIN Products USING(SupplierID)
+JOIN Orderdetails USING(ProductID)
+GROUP BY SupplierName
+ORDER BY total_quantity DESC
+LIMIT 1 OFFSET 3
+
+
+5. Вывести среднюю стоимость заказа
+
+SELECT AVG(Orderdetails.Quantity * Products.Price) AS average_order_cost
+FROM Orderdetails
+JOIN Products USING(ProductID)
+
+
+6. Вывести заказы со скидочной ценой (скидка 15%)
+
+SELECT OrderID, CustomerName, OrderDate,
+(Quantity * (Price - (Price * 0.15))) AS Discount
+FROM Orders 
+JOIN Customers USING(CustomerID)
+JOIN OrderDetails USING(OrderID)
+JOIN Products USING(ProductID)
+WHERE Discount
+
