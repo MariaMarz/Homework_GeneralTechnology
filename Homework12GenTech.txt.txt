@@ -1,0 +1,25 @@
+
+1. Опишите документ "комментарий" с произвольными полями.
+
+{_id : 1, video_id : 1, author_id : 1, content : "Cool", created_at : 14.08.2023, likes : 25}
+
+{_id : 2, video_id : 2, author_id : 2, content : "Wonderfull", created_at : 7.09.2023, likes : 98}
+
+{_id : 3, video_id : 3, author_id : 3, content : "Boring", created_at : 11.06.2023, likes : 2}
+
+{_id : 4, video_id : 4, author_id : 4, content : "I like it", created_at : 14.01.2023, likes : 17}
+
+{_id : 5, video_id : 5, author_id : 5, content : "Super", created_at : 28.02.2023, likes : 12}
+
+
+2. Опишите документ "реакция" с произвольными полями.
+
+{_id : 1, author_id : 1, video_id : 1, reaction_type : like, created_at : 02.03.2023, comment_id : 1}
+
+{_id : 2, author_id : 2, video_id : 2, reaction_type : like, created_at : 07.04.2023, comment_id : 2}
+
+{_id : 3, author_id : 3, video_id : 3, reaction_type : dislike, created_at : 12.04.2023, comment_id : 3}
+
+{_id : 4, author_id : 4, video_id : 4, reaction_type : dislike, created_at : 26.05.2023, comment_id : 4}
+
+{_id : 5, author_id : 5, video_id : 5, reaction_type : like, created_at : 02.09.2023, comment_id : 5}
